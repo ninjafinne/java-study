@@ -1,4 +1,4 @@
-public class Dog {
+public final class Dog {
 	public final String name;
 	public final String breed;
 	public final int age_years;
@@ -7,8 +7,8 @@ public class Dog {
 	public static class Builder {
 		private String name;
 		private String breed;
-		private int age_years;
-		private int weight_kg;
+		private int age_years = -1;
+		private int weight_kg = -1;
 		
 		public Builder withName(String name) {
 			this.name = name;
@@ -35,7 +35,16 @@ public class Dog {
 		}
 		
 		public Dog build() {
-			return new Dog(this.name, this.breed, this.age_years, this.weight_kg);
+			Dog dog = new Dog(this.name, this.breed, this.age_years, this.weight_kg);
+			if (dog.name == null)
+				throw new IllegalStateException("Field name uninitialized");
+			if (dog.breed == null)
+				throw new IllegalStateException("Field breed uninitialized");
+			if (dog.age_years == -1)
+				throw new IllegalStateException("Field age_years uninitialized");
+			if (dog.weight_kg == -1)
+				throw new IllegalStateException("Field weight_kg uninitialized");
+			return dog;
 		}
 	}
 	
