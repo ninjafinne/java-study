@@ -3,7 +3,7 @@ public final class Dog {
 	public final String breed;
 	public final int age_years;
 	public final int weight_kg;
-	
+		
 	public static class Builder {
 		private String name;
 		private String breed;
@@ -53,5 +53,9 @@ public final class Dog {
 		breed = _breed;
 		age_years = _age_years;
 		weight_kg = _weight_kg;
+	}
+	
+	public String toString() {
+		return name + " (" + breed + ", " + age_years + " years, " + weight_kg + " kg)";
 	}
 }
